@@ -22,12 +22,36 @@ body {
 h1 {
     text-align: center;
     font-size: 3rem;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     background: linear-gradient(45deg, #f39c12, #e74c3c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.search-navigation {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.search-nav-btn {
+    background: linear-gradient(45deg, #17a2b8, #20c997);
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 25px;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(23,162,184,0.3);
+}
+
+.search-nav-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(23,162,184,0.5);
+    background: linear-gradient(45deg, #20c997, #28a745);
 }
 
 .movies-grid {

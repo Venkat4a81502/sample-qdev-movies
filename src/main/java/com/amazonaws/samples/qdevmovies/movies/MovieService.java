@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -68,5 +69,43 @@ public class MovieService {
             return Optional.empty();
         }
         return Optional.ofNullable(movieMap.get(id));
+    }
+
+    /**
+     * Search movies by name, id, and/or genre
+     * @param name Movie name to search for (case-insensitive partial match)
+     * @param id Movie ID to search for (exact match)
+     * @param genre Movie genre to search for (case-insensitive partial match)
+     * @return List of movies matching the search criteria
+     */
+    public List<Movie> searchMovies(String name, Long id, String genre) {
+        logger.info("Searching movies with name: {}, id: {}, genre: {}", name, id, genre);
+        
+        return movies.stream()
+                .filter(movie -> matchesName(movie, name))
+                .filter(movie -> matchesId(movie, id))
+                .filter(movie -> matchesGenre(movie, genre))
+                .collect(Collectors.toList());
+    }
+
+    private boolean matchesName(Movie movie, String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return true;
+        }
+        return movie.getMovieName().toLowerCase().contains(name.toLowerCase().trim());
+    }
+
+    private boolean matchesId(Movie movie, Long id) {
+        if (id == null) {
+            return true;
+        }
+        return movie.getId() == id;
+    }
+
+    private boolean matchesGenre(Movie movie, String genre) {
+        if (genre == null || genre.trim().isEmpty()) {
+            return true;
+        }
+        return movie.getGenre().toLowerCase().contains(genre.toLowerCase().trim());
     }
 }
